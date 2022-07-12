@@ -44,58 +44,60 @@
   text-align: center;
 }
 
-table.purpleHorizon {
-  border: 1px solid #000000;
-  background-color: #555555;
-  width: 350px;
-  text-align: center;
+table {
+  background-color: #555;
+  border: 1px solid black;
   border-collapse: collapse;
+  text-align: center;
+  width: 350px;
 }
-table.purpleHorizon td, table.purpleHorizon th {
-  border: 1px solid #555555;
+
+table td, table th {
+  border: 1px solid #555;
   padding: 5px 2px;
 }
-table.purpleHorizon tbody td {
+
+table tbody td {
+  color: white;
   font-size: 13px;
-  font-weight: bold;
-  color: #FFFFFF;
   padding: 10px;
 }
-table.purpleHorizon tr:nth-child(even) {
+
+table tr:nth-child( even ) {
   background: #414141;
 }
-table.purpleHorizon thead {
-  background: #000000;
-  background: -moz-linear-gradient(top, #404040 0%, #191919 66%, #000000 100%);
-  background: -webkit-linear-gradient(top, #404040 0%, #191919 66%, #000000 100%);
-  background: linear-gradient(to bottom, #404040 0%, #191919 66%, #000000 100%);
+
+table thead {
+  background: black
+    linear-gradient(to bottom, #404040 0%, #191919 66%, black 100%);
 }
-table.purpleHorizon thead th {
+
+table thead th {
+  color: white;
   font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;
   padding: 10px;
+  text-align: center;
 }
-table.purpleHorizon tfoot {
-  font-size: 9px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: #000000;
-  background: -moz-linear-gradient(top, #404040 0%, #191919 66%, #000000 100%);
-  background: -webkit-linear-gradient(top, #404040 0%, #191919 66%, #000000 100%);
-  background: linear-gradient(to bottom, #404040 0%, #191919 66%, #000000 100%);
-}
-table.purpleHorizon tfoot td {
+
+table tfoot {
+  background: black
+    linear-gradient(to bottom, #404040 0%, #191919 66%, black 100%);
+  color: white;
   font-size: 9px;
 }
-table.purpleHorizon tfoot .links {
+
+table tfoot td {
+  font-size: 9px;
+}
+
+table tfoot .links {
   text-align: right;
 }
-table.purpleHorizon tfoot .links a{
-  display: inline-block;
+
+table tfoot .links a {
   background: #969696;
-  color: #FFFFFF;
-  padding: 2px 8px;
   border-radius: 5px;
+  color: white;
+  display: inline-block;
+  padding: 2px 8px;
 }
