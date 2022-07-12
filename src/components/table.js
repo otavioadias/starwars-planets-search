@@ -4,9 +4,9 @@ import myContext from '../context/myContext';
 const Table = () => {
   const { data } = useContext(myContext);
   const [valueFilter, setValueFilter] = useState('');
-  const [arrayValue, setArrayValue] = useState('');
-  const [column, setColumnValue] = useState('population');
-  const [comparison, setComparisionValue] = useState('maior que');
+  const [arrayValue, setArrayValue] = useState([]);
+  const [columnValue, setColumnValue] = useState('population');
+  const [comparisonValue, setComparisionValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
 
   const lowerFilter = valueFilter.toLowerCase();
@@ -15,23 +15,23 @@ const Table = () => {
     filterByName: {
       name: valueFilter,
     },
-    filterByNumericValues: [
+    filterByNumericValues:
       {
-        column,
-        comparison,
+        column: columnValue,
+        comparison: comparisonValue,
         value: numberValue,
-      }],
+      },
     arrayValue,
   };
 
   const onChange = () => {
-    setArrayValue({ arrayValue: context.filterByNumericValues });
+    setArrayValue((prev) => [...prev, context.filterByNumericValues]);
   };
 
   const filter = (d, n, a) => {
     let newArray = [...d];
     if (a !== undefined) {
-      a.map(({ value }) => {
+      a.map(({ column, comparison, value }) => {
         switch (comparison) {
         case 'maior que':
           newArray = newArray.filter((i) => (i[column]) > Number(value));
@@ -54,8 +54,7 @@ const Table = () => {
     return newArray;
   };
 
-  console.log(arrayValue.arrayValue);
-  const filterArray = filter(data, valueFilter, arrayValue.arrayValue);
+  const filterArray = filter(data, valueFilter, arrayValue);
 
   return (
     <myContext.Provider value={ context }>
@@ -76,7 +75,7 @@ const Table = () => {
             id="numericFilter"
             data-testid="column-filter"
             name="column"
-            value={ column }
+            value={ columnValue }
             onChange={ (e) => setColumnValue(e.target.value) }
           >
             <option value="population">population</option>
@@ -93,7 +92,7 @@ const Table = () => {
             id="operatorFilter"
             data-testid="comparison-filter"
             name="comparison"
-            value={ comparison }
+            value={ comparisonValue }
             onChange={ (e) => setComparisionValue(e.target.value) }
           >
             <option value="maior que">maior que</option>
