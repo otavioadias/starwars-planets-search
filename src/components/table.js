@@ -4,18 +4,61 @@ import myContext from '../context/myContext';
 const Table = () => {
   const { data } = useContext(myContext);
   const [valueFilter, setValueFilter] = useState('');
+  const [arrayValue, setArrayValue] = useState('');
+  const [column, setColumnValue] = useState('population');
+  const [comparison, setComparisionValue] = useState('maior que');
+  const [numberValue, setNumberValue] = useState(0);
 
   const lowerFilter = valueFilter.toLowerCase();
 
-  const planetFilter = data.filter((planet) => (
-    planet.name.toLowerCase().includes(lowerFilter)));
-
-  const filterByName = {
-    name: valueFilter,
+  const context = {
+    filterByName: {
+      name: valueFilter,
+    },
+    filterByNumericValues: [
+      {
+        column,
+        comparison,
+        value: numberValue,
+      }],
+    arrayValue,
   };
 
+  const onChange = () => {
+    setArrayValue({ arrayValue: context.filterByNumericValues });
+  };
+
+  const filter = (d, n, a) => {
+    let newArray = [...d];
+    if (a !== undefined) {
+      a.map(({ value }) => {
+        switch (comparison) {
+        case 'maior que':
+          newArray = newArray.filter((i) => (i[column]) > Number(value));
+          return newArray;
+        case 'menor que':
+          newArray = newArray.filter((i) => (i[column]) < Number(value));
+          return newArray;
+        case 'igual a':
+          newArray = newArray.filter((i) => (i[column]) === value);
+          return newArray;
+        default:
+          return false;
+        }
+      });
+    }
+    if (n) {
+      return d.filter((planet) => (
+        planet.name.toLowerCase().includes(lowerFilter)));
+    }
+    return newArray;
+  };
+
+  console.log(arrayValue.arrayValue);
+  const filterArray = filter(data, valueFilter, arrayValue.arrayValue);
+
   return (
-    <myContext.Provider value={ filterByName }>
+    <myContext.Provider value={ context }>
       <header className="filter">
         <input
           type="text"
@@ -25,6 +68,59 @@ const Table = () => {
           onChange={ (e) => setValueFilter(e.target.value) }
         />
       </header>
+      <section>
+        <label htmlFor="numericFilter">
+          Coluna:
+          <select
+            className="numericFilter"
+            id="numericFilter"
+            data-testid="column-filter"
+            name="column"
+            value={ column }
+            onChange={ (e) => setColumnValue(e.target.value) }
+          >
+            <option value="population">population</option>
+            <option value="orbital_period">orbital_period</option>
+            <option value="diameter">diameter</option>
+            <option value="rotation_period">rotation_period</option>
+            <option value="surface_water">surface_water</option>
+          </select>
+        </label>
+        <label htmlFor="operatorFilter">
+          Operador:
+          <select
+            className="operatorFilter"
+            id="operatorFilter"
+            data-testid="comparison-filter"
+            name="comparison"
+            value={ comparison }
+            onChange={ (e) => setComparisionValue(e.target.value) }
+          >
+            <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
+            <option value="igual a">igual a</option>
+          </select>
+        </label>
+        <label htmlFor="numberFilter">
+          Valor:
+          <input
+            type="number"
+            className="operatorFilter"
+            name="value"
+            id="operatorFilter"
+            data-testid="value-filter"
+            value={ numberValue }
+            onChange={ (e) => setNumberValue(e.target.value) }
+          />
+        </label>
+        <button
+          type="button"
+          data-testid="button-filter"
+          onClick={ () => onChange() }
+        >
+          Filtrar
+        </button>
+      </section>
       <table className="purpleHorizon">
         <thead>
           <tr>
@@ -44,7 +140,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          { planetFilter.map((header) => (
+          { filterArray.map((header) => (
             <tr key={ header.created }>
               <td>{header.name}</td>
               <td>{header.rotation_period}</td>
