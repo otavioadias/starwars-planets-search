@@ -74,8 +74,8 @@ table thead {
 
 table thead th {
   color: white;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 16px;
+  padding: 13px;
   text-align: center;
 }
 
@@ -100,4 +100,9 @@ table tfoot .links a {
   color: white;
   display: inline-block;
   padding: 2px 8px;
+}
+
+.filter {
+  padding: 20px;
+  text-align: center;
 }

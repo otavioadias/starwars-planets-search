@@ -26,7 +26,7 @@ function Provider({ children }) {
 
   return (
     <div>
-      {api ? <h1 className="title">Star Wars Planets</h1> : (
+      {api ? <h1 className="title">StarWars Planets</h1> : (
         <myContext.Provider value={ contextValue }>
           {children}
         </myContext.Provider>
