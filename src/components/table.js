@@ -78,11 +78,21 @@ const Table = () => {
             value={ columnValue }
             onChange={ (e) => setColumnValue(e.target.value) }
           >
-            <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            { !arrayValue.find((op) => (
+              op.column === 'population'
+            )) && <option value="population">population</option>}
+            { !arrayValue.find((op) => (
+              op.column === 'orbital_period'
+            )) && <option value="orbital_period">orbital_period</option>}
+            { !arrayValue.find((op) => (
+              op.column === 'diameter'
+            )) && <option value="diameter">diameter</option>}
+            { !arrayValue.find((op) => (
+              op.column === 'rotation_period'
+            )) && <option value="rotation_period">rotation_period</option>}
+            { !arrayValue.find((op) => (
+              op.column === 'surface_water'
+            )) && <option value="surface_water">surface_water</option>}
           </select>
         </label>
         <label htmlFor="operatorFilter">
@@ -120,6 +130,24 @@ const Table = () => {
           Filtrar
         </button>
       </section>
+      <section>
+        {arrayValue?.map((fil) => (
+          <p key={ fil.value } data-testid="filter">
+            {fil.column}
+            {' '}
+            |
+            {' '}
+            {fil.comparison}
+            {' '}
+            |
+            {' '}
+            {fil.value}
+            {' '}
+            <button type="button">x</button>
+          </p>
+        ))}
+      </section>
+      <button type="button" data-testid="button-remove-filters">Remover FIltros</button>
       <table className="purpleHorizon">
         <thead>
           <tr>
