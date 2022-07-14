@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react';
 import myContext from '../context/myContext';
 
 const Table = () => {
+  const aColumn = ['population',
+    'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   const { data } = useContext(myContext);
   const [valueFilter, setValueFilter] = useState('');
   const [arrayValue, setArrayValue] = useState([]);
-  const [columnValue, setColumnValue] = useState('population');
+  const [columnValue, setColumnValue] = useState(aColumn[0]);
   const [comparisonValue, setComparisionValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
 
@@ -55,6 +57,7 @@ const Table = () => {
   };
 
   const filterArray = filter(data, valueFilter, arrayValue);
+  console.log(arrayValue);
 
   return (
     <myContext.Provider value={ context }>
@@ -78,21 +81,12 @@ const Table = () => {
             value={ columnValue }
             onChange={ (e) => setColumnValue(e.target.value) }
           >
-            { !arrayValue.find((op) => (
-              op.column === 'population'
-            )) && <option value="population">population</option>}
-            { !arrayValue.find((op) => (
-              op.column === 'orbital_period'
-            )) && <option value="orbital_period">orbital_period</option>}
-            { !arrayValue.find((op) => (
-              op.column === 'diameter'
-            )) && <option value="diameter">diameter</option>}
-            { !arrayValue.find((op) => (
-              op.column === 'rotation_period'
-            )) && <option value="rotation_period">rotation_period</option>}
-            { !arrayValue.find((op) => (
-              op.column === 'surface_water'
-            )) && <option value="surface_water">surface_water</option>}
+            {aColumn.map((opt) => (
+              !arrayValue.find((op) => (
+                op.column === opt
+              ))
+            && <option key={ opt } value={ opt }>{opt}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="operatorFilter">
@@ -125,14 +119,19 @@ const Table = () => {
         <button
           type="button"
           data-testid="button-filter"
-          onClick={ () => onChange() }
+          onClick={ (index) => {
+            onChange();
+            const cloneColumn = [...aColumn];
+            cloneColumn.splice(index, 1);
+            setColumnValue(cloneColumn[0]);
+          } }
         >
           Filtrar
         </button>
       </section>
       <section>
-        {arrayValue?.map((fil) => (
-          <p key={ fil.value } data-testid="filter">
+        {arrayValue?.map((fil, index) => (
+          <p key={ index } data-testid="filter">
             {fil.column}
             {' '}
             |
@@ -143,11 +142,26 @@ const Table = () => {
             {' '}
             {fil.value}
             {' '}
-            <button type="button">x</button>
+            <button
+              type="button"
+              onClick={ () => {
+                const cloneArray = [...arrayValue];
+                cloneArray.splice(index, 1);
+                setArrayValue(cloneArray);
+              } }
+            >
+              x
+            </button>
           </p>
         ))}
       </section>
-      <button type="button" data-testid="button-remove-filters">Remover FIltros</button>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => setArrayValue([]) }
+      >
+        Remover Filtros
+      </button>
       <table className="purpleHorizon">
         <thead>
           <tr>
