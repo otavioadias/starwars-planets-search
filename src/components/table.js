@@ -61,15 +61,15 @@ const Table = () => {
 
   return (
     <myContext.Provider value={ context }>
-      <header className="filter">
-        <input
-          type="text"
-          placeholder="Procure o planeta pelo nome"
-          data-testid="name-filter"
-          value={ valueFilter }
-          onChange={ (e) => setValueFilter(e.target.value) }
-        />
-      </header>
+      <input
+        className="filter"
+        type="text"
+        placeholder="Procure o planeta pelo nome"
+        data-testid="name-filter"
+        id="name-filter"
+        value={ valueFilter }
+        onChange={ (e) => setValueFilter(e.target.value) }
+      />
       <section>
         <label htmlFor="numericFilter">
           Coluna:
