@@ -26,7 +26,17 @@ function Provider({ children }) {
 
   return (
     <div>
-      {api ? <h1 className="title">StarWars Planets</h1> : (
+      {/* References for image = http://pa1.narvii.com/7653/791a8dcb1d64cd39ee7a8becf84e65e6de1767c8r1-500-190_00.gif */}
+      {api ? (
+        <div className="containerImage">
+          <p>Loading</p>
+          <img
+            className="gifStarWars"
+            src="starw.gif"
+            alt="Gif StarWars"
+          />
+        </div>
+      ) : (
         <myContext.Provider value={ contextValue }>
           {children}
         </myContext.Provider>

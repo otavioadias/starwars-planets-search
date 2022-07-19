@@ -40,8 +40,20 @@
   }
 }
 
-.title {
-  text-align: center;
+body {
+  background-color: black;
+  color: white;
+}
+
+.gifStarWars {
+  display: flex;
+  align-items: center;
+}
+
+.containerImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 table {
@@ -83,7 +95,8 @@ table tfoot {
   background: black
     linear-gradient(to bottom, #404040 0%, #191919 66%, black 100%);
   color: white;
-  font-size: 9px;
+  font-size: 10px;
+  text-align: center;
 }
 
 table tfoot td {
@@ -91,7 +104,7 @@ table tfoot td {
 }
 
 table tfoot .links {
-  text-align: right;
+  text-align: center;
 }
 
 table tfoot .links a {
@@ -103,6 +116,85 @@ table tfoot .links a {
 }
 
 .filter {
-  padding: 20px;
+  padding: 10px;
+  width: 200px;
   text-align: center;
+  border-radius: 10px;
+}
+
+.containeFilter {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 5px;
+}
+
+.containerNumericFilter {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  padding: 10px;
+}
+
+.numericFilter, .operatorFilter, .numberFilter {
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.btnSearch {
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  background-image: url("https://img.icons8.com/ios-glyphs/30/FFFFFF/search-pain.png");
+}
+
+.btnSearch:hover {
+  transform: scale(1.2); 
+}
+
+.cleanAll {
+  border: none;
+  width: 25px;
+  height: 25px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  background-image: url("https://img.icons8.com/wired/25/FFFFFF/filled-trash.png");
+}
+
+.btnDeleteAll {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ulFilters {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  padding: 10px;
+  gap: 15px;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.cleanFilter {
+  border: none;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  background-image: url("https://img.icons8.com/ios/20/FFFFFF/minus.png");
+}
+
+.cleanFilter:hover {
+  transform: scale(1.2); 
 }

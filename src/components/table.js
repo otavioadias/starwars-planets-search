@@ -57,20 +57,22 @@ const Table = () => {
   };
 
   const filterArray = filter(data, valueFilter, arrayValue);
-  console.log(arrayValue);
 
   return (
     <myContext.Provider value={ context }>
-      <input
-        className="filter"
-        type="text"
-        placeholder="Procure o planeta pelo nome"
-        data-testid="name-filter"
-        id="name-filter"
-        value={ valueFilter }
-        onChange={ (e) => setValueFilter(e.target.value) }
-      />
-      <section>
+      <label htmlFor="name-filter" className="containeFilter">
+        <img src="https://img.icons8.com/fluency-systems-regular/48/FFFFFF/star-trek-romulan-ship.png" alt=" Star Trek Romulan Ship" widht="10px" />
+        <input
+          className="filter"
+          type="text"
+          placeholder="Pesquise o planeta pelo nome"
+          data-testid="name-filter"
+          id="name-filter"
+          value={ valueFilter }
+          onChange={ (e) => setValueFilter(e.target.value) }
+        />
+      </label>
+      <section className="containerNumericFilter">
         <label htmlFor="numericFilter">
           Coluna:
           <select
@@ -118,6 +120,7 @@ const Table = () => {
         </label>
         <button
           type="button"
+          className="btnSearch"
           data-testid="button-filter"
           onClick={ (index) => {
             onChange();
@@ -126,42 +129,49 @@ const Table = () => {
             setColumnValue(cloneColumn[0]);
           } }
         >
-          Filtrar
+          {/* Filtrar */}
         </button>
       </section>
-      <section>
+      <section className="filters">
         {arrayValue?.map((fil, index) => (
-          <p key={ index } data-testid="filter">
-            {fil.column}
-            {' '}
-            |
-            {' '}
-            {fil.comparison}
-            {' '}
-            |
-            {' '}
-            {fil.value}
-            {' '}
+          <ul key={ index } className="ulFilters">
+            <li key={ index } data-testid="filter">
+              {fil.column}
+              {' '}
+              |
+              {' '}
+              {fil.comparison}
+              {' '}
+              |
+              {' '}
+              {fil.value}
+              {' '}
+            </li>
             <button
               type="button"
+              className="cleanFilter"
+              data-testid="clean-filter"
               onClick={ () => {
                 const cloneArray = [...arrayValue];
                 cloneArray.splice(index, 1);
                 setArrayValue(cloneArray);
               } }
             >
-              x
+              {/* x */}
             </button>
-          </p>
+          </ul>
         ))}
       </section>
-      <button
-        type="button"
-        data-testid="button-remove-filters"
-        onClick={ () => setArrayValue([]) }
-      >
-        Remover Filtros
-      </button>
+      <div className="btnDeleteAll">
+        <button
+          type="button"
+          className="cleanAll"
+          data-testid="button-remove-filters"
+          onClick={ () => setArrayValue([]) }
+        >
+          {/* Remover Filtros */}
+        </button>
+      </div>
       <table className="purpleHorizon">
         <thead>
           <tr>
@@ -199,6 +209,20 @@ const Table = () => {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <td>
+            <a target="_blank" href="https://icons8.com/icon/IPavR3bWDw81/star-trek-romulan-ship" rel="noreferrer">Star Trek Romulan Ship icon by Icons8</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://icons8.com/icon/FinfCznQLOCV/dor-da-pesquisa" rel="noreferrer">Dor da pesquisa icon by Icons8</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://icons8.com/icon/104401/remover" rel="noreferrer">Remover icon by Icons8</a>
+          </td>
+          <td>
+            <a target="_blank" href="https://icons8.com/icon/1504/menos" rel="noreferrer">Menos icon by Icons8</a>
+          </td>
+        </tfoot>
       </table>
     </myContext.Provider>
   );
