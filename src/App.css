@@ -188,7 +188,7 @@ table tfoot .links a {
 
 .cleanFilter {
   background-color: black;
-  background-image: url('https://img.icons8.com/ios/20/FFFFFF/minus.png');
+  /* background-image: url('https://img.icons8.com/ios/20/FFFFFF/minus.png'); */
   border: none;
   color: white;
   height: 20px;

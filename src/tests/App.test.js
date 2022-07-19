@@ -113,7 +113,7 @@ test('4 - Teste se a aplicação filtra usando menor que:', async () => {
   userEvent.click(btnSearch);
   expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
 
-  const deleteFilter = await screen.findByTestId('clean-filter');
+  const deleteFilter = await screen.findByTestId('filter');
   userEvent.click(deleteFilter);
   expect(deleteFilter).not.toBeInTheDocument();
 });

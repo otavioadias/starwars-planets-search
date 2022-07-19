@@ -146,19 +146,18 @@ const Table = () => {
               {' '}
               {fil.value}
               {' '}
+              <button
+                type="button"
+                className="cleanFilter"
+                onClick={ () => {
+                  const cloneArray = [...arrayValue];
+                  cloneArray.splice(index, 1);
+                  setArrayValue(cloneArray);
+                } }
+              >
+                x
+              </button>
             </li>
-            <button
-              type="button"
-              className="cleanFilter"
-              data-testid="clean-filter"
-              onClick={ () => {
-                const cloneArray = [...arrayValue];
-                cloneArray.splice(index, 1);
-                setArrayValue(cloneArray);
-              } }
-            >
-              {/* x */}
-            </button>
           </ul>
         ))}
       </section>
